@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class Servidor {
 	private static final int PUERTO = 5000; //Si cambias aquí el puerto, recuerda cambiarlo en el cliente
 	private static int slotsporPelicula = 0; 
+	private static String 	IPServidor = "192.168.1.4";
 	private static int max= 3;
 
 	
@@ -33,7 +34,7 @@ public class Servidor {
 	public static void main(String[] args) throws RemoteException, AlreadyBoundException {
 		
 		
-		
+		System.setProperty("java.rmi.server.hostname", IPServidor);
         Remote remote = UnicastRemoteObject.exportObject(new Interfaz(){
         	/*
 				Sobrescribir opcionalmente los métodos que escribimos en la interfaz
@@ -120,7 +121,8 @@ public class Servidor {
         
         
         Registry registry = LocateRegistry.createRegistry(PUERTO);
-       	System.out.println("Servidor escuchando en el puerto " + String.valueOf(PUERTO));
+       
+        System.out.println("Servidor escuchando en el puerto " + String.valueOf(PUERTO));
         registry.bind("Sistema de Video", remote); // Registrar Peliculas
     }
 	/*

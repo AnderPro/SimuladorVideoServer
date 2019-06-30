@@ -32,7 +32,7 @@ public class Cliente {
     	
     	
     	Registry registry = LocateRegistry.getRegistry(IP, PUERTO);
-        Interfaz interfaz = (Interfaz) registry.lookup("Sistema de Video"); //Buscar en el registro...
+        Interfaz interfaz = (Interfaz) registry.lookup("videos"); //Buscar en el registro...
     	
        
 
