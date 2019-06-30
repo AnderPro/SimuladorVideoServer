@@ -16,8 +16,7 @@ public interface Interfaz extends Remote {
 	void salirPelicula(int indice)throws RemoteException;
 	
 	boolean confirmacionPelicula(int indice) throws RemoteException;
-	//String puederVer()throws RemoteException;
-	//String NopuedeVer()throws RemoteException;
+	
 	
 
 }

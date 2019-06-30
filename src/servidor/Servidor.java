@@ -10,7 +10,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 
 
 
@@ -26,8 +25,6 @@ public class Servidor {
 			new Pelicula("Pelicula 1",slotsporPelicula)
 			,new Pelicula("Pelicula 2",slotsporPelicula)
 			,new Pelicula("Pelicula 3",slotsporPelicula)};
-	
-	//private static final String [] peliculas = {"La chica de Alado","Rapidos Y Furiosos","Matrix3"};
 	
 	
 	
@@ -72,7 +69,7 @@ public class Servidor {
            
             @Override
             public void salirPelicula(int indice) throws RemoteException{
-            	//verificar(indice);
+            	
             	listaPeliculas[indice].disminuirClientesPelicula();	
             	           	
             };
@@ -112,7 +109,7 @@ public class Servidor {
             	cadena += "Se esta reproduciendo la pelicula: "+ listaPeliculas[indice].getTitulo() 
             			+"\n Nº de usuarios en linea:"+ listaPeliculas[indice].getNumeroClientesPelicula();
             	
-            
+            	System.out.println("Se esta transmitiendo:"+ listaPeliculas[indice].getTitulo()  );
             	return cadena;
             }
   
@@ -121,28 +118,10 @@ public class Servidor {
         
         
         Registry registry = LocateRegistry.createRegistry(PUERTO);
-       
         System.out.println("Servidor escuchando en el puerto " + String.valueOf(PUERTO));
         registry.bind("Sistema de Video", remote); // Registrar Peliculas
     }
-	/*
-	public static boolean verificar(int indice) {
-		boolean bandera = false;
-		if(listaPeliculas[indice].getNumeroClientesPelicula()==max) {
-			
-			System.out.println("Esta copado con la pelicula: "+ listaPeliculas[indice].getTitulo());
-			bandera=false;
-			
-			//return false;
-		}
-		else if(listaPeliculas[indice].getNumeroClientesPelicula()<max) {
-			listaPeliculas[indice].setNumeroClientesPelicula();
-			bandera = true;
-			//return true;
-		}
-		return bandera;
-		
-	}*/
+
 	
 	
 	
