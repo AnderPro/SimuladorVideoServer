@@ -12,22 +12,19 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+
 
 
 public class Servidor {
 	private static final int PUERTO = 5000; //Si cambias aquí el puerto, recuerda cambiarlo en el cliente
 	private static int slotsporPelicula = 0; 
 	private static int max= 3;
-	private static Runtime rt = null;
+
 	
 	private static final Pelicula[] listaPeliculas = {
-			new Pelicula("La chica de Alado",slotsporPelicula)
-			,new Pelicula("Rapidos Y Furiosos",slotsporPelicula)
-			,new Pelicula("Matrix",slotsporPelicula)};
+			new Pelicula("Pelicula 1",slotsporPelicula)
+			,new Pelicula("Pelicula 2",slotsporPelicula)
+			,new Pelicula("Pelicula 3",slotsporPelicula)};
 	
 	//private static final String [] peliculas = {"La chica de Alado","Rapidos Y Furiosos","Matrix3"};
 	
@@ -114,33 +111,7 @@ public class Servidor {
             	cadena += "Se esta reproduciendo la pelicula: "+ listaPeliculas[indice].getTitulo() 
             			+"\n Nº de usuarios en linea:"+ listaPeliculas[indice].getNumeroClientesPelicula();
             	
-            	Runtime rt = Runtime.getRuntime();
-            	
-            	//*** NOTA: se tiene que abrir tres vlc y configurar el directorio de la pelicula, cada una con diferente puerto y URL.
-            	// OJO cambiar 192.168.1.4 por la Ip del Servidor
-            	try {
-            		switch (indice) {
-    				case 0:	
-    					// abrir el firefox y conectarse con el servidor de vlc
-    					rt.exec("/usr/bin/firefox 192.168.1.4:8080/pelicula1");
-    					break;
-    					
-    				case 1:	
-    					rt.exec("/usr/bin/firefox 192.168.1.4:8081/pelicula2");
-        				break;
-        				
-    				case 2:
-    					rt.exec("/usr/bin/firefox 192.168.1.4:8080/pelicula3");
-    					break;
-
-    				default:
-    					break;
-    				}
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+            
             	return cadena;
             }
   

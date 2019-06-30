@@ -3,6 +3,7 @@ package cliente;
 import interfaz.*;
 import clases.*;
 
+import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -14,6 +15,7 @@ import java.util.Scanner;
 public class Cliente {
 	private static final String IP = "localhost"; // Puedes cambiar a localhost
 	private static final int PUERTO = 5000; //Si cambias aquí el puerto, recuerda cambiarlo en el servidor
+	private static Runtime rt = null;
 	
     public static void main(String[] args) throws RemoteException, NotBoundException {
     	
@@ -46,6 +48,31 @@ public class Cliente {
             if(interfaz.confirmacionPelicula(filmSeleccionada)) {
             	peliculatransmitida = interfaz.transmision(filmSeleccionada);
             	estoyViendoPeli = true;
+            	Runtime rt = Runtime.getRuntime();
+            	String cadena="";
+            	
+            	try {
+            		switch (filmSeleccionada) {
+					case 0:
+						cadena = "/usr/bin/firefox " + IP +":8080/pelicula1";
+						rt.exec(cadena);
+						break;
+					case 1:
+						cadena = "/usr/bin/firefox " + IP +":8081/pelicula2";
+						rt.exec(cadena);
+						break;
+					case 2:
+						cadena = "/usr/bin/firefox " + IP +":8082/pelicula3";
+						rt.exec(cadena);
+						break;
+					default:
+						break;
+					}
+					
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
             System.out.println(peliculatransmitida);
             
